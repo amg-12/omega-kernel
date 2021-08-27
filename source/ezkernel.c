@@ -66,6 +66,7 @@ u32 folder_total;
 
 u32 gl_currentpage;
 u32 gl_norOffset;
+u16 gl_boot_option;
 u16 gl_select_lang;
 u16 gl_engine_sel;
 
@@ -139,6 +140,10 @@ void Show_help_window()
 		
 	DrawHZText12("L+START:",0,3,65, gl_color_selected,1);
 		DrawHZText12(gl_LSTART_help,0,52,65, gl_color_text,1);	
+
+  DrawHZText12("HOLD L :",0,3,80, gl_color_selected,1);
+    DrawHZText12("Boot into",0,52,80, gl_color_text,1);
+    DrawHZText12("alternate option",0,52,90, gl_color_text,1);
 		
 	DrawHZText12(gl_online_manual,0,240-70-7,77, gl_color_text,1);
 	while(1)
@@ -1267,6 +1272,12 @@ void CheckSwitch(void)
 	{
 		gl_ingame_RTC_open_status = 0x1;
 	}
+  
+  gl_boot_option = Read_SET_info(14);
+  if( (gl_boot_option != 0x0) && (gl_boot_option != 0x1))
+  {
+    gl_boot_option = 0x0;
+  }
 }
 //---------------------------------------------------------------------------------
 void ShowTime(u32 page_num ,u32 page_mode)
@@ -1645,7 +1656,7 @@ int main(void) {
 	else {
 		VBlankIntrWait();
 		scanKeys();
-		if(keysDownRepeat() & KEY_L || keysDown() & KEY_L)
+		if(gl_boot_option ^ (keysDownRepeat() & KEY_L || keysDown() & KEY_L))
 		{
 			page_num = NOR_list;
 			goto load_file;
