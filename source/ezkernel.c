@@ -145,6 +145,8 @@ void Show_help_window()
     DrawHZText12("Boot into",0,52,80, gl_color_text,1);
     DrawHZText12("alternate option",0,52,90, gl_color_text,1);
 		
+  DrawHZText12("ami's fork",0,160,3, gl_color_selected,1);
+  
 	DrawHZText12(gl_online_manual,0,240-70-7,77, gl_color_text,1);
 	while(1)
 	{

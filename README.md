@@ -1,3 +1,12 @@
+### This fork adds a new option to the settings:
+
+* BOOT INTO
+  * EZ MENU  - the console boots into the menu as normal
+  * NOR GAME - the console boots directly into the first game in NOR memory, if there is one
+* You can hold L while the console is powering to boot into the alternate option
+
+---
+
 #EZ-FLASH OMEGA Kernel
 
 ### How to build 
